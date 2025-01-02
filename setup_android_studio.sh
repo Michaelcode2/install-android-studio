@@ -7,12 +7,18 @@ NC='\033[0m' # No Color
 
 echo -e "${RED} Log.txt created for logging !${NC}"
 
+# Install packages
+apt update -y && sudo apt-get upgrade -y
+apt install -y curl git unzip xz-utils zip libglu1-mesa
+
+# Install the following prerequisite packages for Android Studio:
+apt install -y libc6:amd64 libstdc++6:amd64 lib32z1 libbz2-1.0:amd64
 
 DOWNLOADS=$HOME/Downloads
 BASHRC=$HOME/.bashrc
 
-STUDIO_URL="https://dl.google.com/dl/android/studio/ide-zips/3.3.0.20/android-studio-ide-182.5199772-linux.zip"
-FLUTTER_URL="https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_v1.0.0-stable.tar.xz";
+STUDIO_URL="https://r4---sn-4g5ednd7.gvt1.com/edgedl/android/studio/ide-zips/2024.2.1.12/android-studio-2024.2.1.12-linux.tar.gz"
+FLUTTER_URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.27.1-stable.tar.xz";
 
 #install flutter function
 
@@ -111,7 +117,7 @@ STUDIO_ZIP=` ls $DOWNLOADS | grep "android-studio" `
 echo -e "${BLUE}\nExtracting android studio to $HOME${NC}"
 
 if [ ! -d $HOME/android-studio ]; then
-    unzip $DOWNLOADS/$STUDIO_ZIP -d $HOME  >> log.txt 2>&1 && echo -e "${GREEN} Success !${NC}" ||  (echo -e "${RED} Failed !${NC}" ; exit)
+    tar -xf $DOWNLOADS/$STUDIO_ZIP -C $HOME  >> log.txt 2>&1 && echo -e "${GREEN} Success !${NC}" ||  (echo -e "${RED} Failed !${NC}" ; exit)
     if [ ! -d $HOME/android-studio* ]; then
         echo -e "${RED}File not found. Extract failed ?${NC}"
         exit
